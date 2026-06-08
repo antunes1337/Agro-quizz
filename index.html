@@ -9,7 +9,7 @@
     <div class="container">
         <h1>Agro Quiz 🌱🚜</h1>
         <div id="quiz"></div>
-        <button id="next">Próxima Pergunta</button>
+        <button id="next" style="display:none;">Próxima Pergunta</button>
         <p id="resultado"></p>
     </div>
 
@@ -50,12 +50,14 @@
             p.opcoes.forEach((opcao, i) => {
                 quiz.innerHTML += `<button class="opcao" onclick="verificar(${i})">${opcao}</button>`;
             });
+            botao.style.display = "none"; // botão escondido até acertar
         }
 
         function verificar(escolha) {
             if (escolha === perguntas[indice].resposta) {
                 pontos++;
                 resultado.textContent = "✅ Resposta correta!";
+                botao.style.display = "block"; // só aparece se acertar
             } else {
                 resultado.textContent = "❌ Resposta errada! O jogo vai recomeçar...";
                 reiniciar();
@@ -65,7 +67,6 @@
         function reiniciar() {
             indice = 0;
             pontos = 0;
-            botao.style.display = "block";
             setTimeout(() => {
                 resultado.textContent = "";
                 mostrarPergunta();
