@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Agro Quiz 🌱🚜</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Agro Quiz 🌱🚜</h1>
+        <div id="quiz"></div>
+        <button id="next">Próxima Pergunta</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        const perguntas = [
+            {
+                pergunta: "Qual é o grão mais produzido no Brasil?",
+                opcoes: ["Arroz", "Soja", "Milho", "Trigo"],
+                resposta: 1
+            },
+            {
+                pergunta: "Qual animal é mais comum na pecuária brasileira?",
+                opcoes: ["Porco", "Galinha", "Boi", "Cabra"],
+                resposta: 2
+            },
+            {
+                pergunta: "Qual prática ajuda a preservar o solo?",
+                opcoes: ["Queimada", "Rotação de culturas", "Desmatamento", "Uso excessivo de agrotóxicos"],
+                resposta: 1
+            },
+            {
+                pergunta: "Qual fruta o Brasil é um dos maiores exportadores?",
+                opcoes: ["Banana", "Manga", "Laranja", "Maçã"],
+                resposta: 2
+            }
+        ];
+
+        let indice = 0;
+        let pontos = 0;
+
+        const quiz = document.getElementById("quiz");
+        const resultado = document.getElementById("resultado");
+        const botao = document.getElementById("next");
+
+        function mostrarPergunta() {
+            const p = perguntas[indice];
+            quiz.innerHTML = `<h2>${p.pergunta}</h2>`;
+            p.opcoes.forEach((opcao, i) => {
+                quiz.innerHTML += `<button class="opcao" onclick="verificar(${i})">${opcao}</button>`;
+            });
+        }
+
+        function verificar(escolha) {
+            if (escolha === perguntas[indice].resposta) {
+                pontos++;
+                resultado.textContent = "✅ Resposta correta!";
+            } else {
+                resultado.textContent = "❌ Resposta errada!";
+            }
+        }
+
+        botao.addEventListener("click", () => {
+            indice++;
+            resultado.textContent = "";
+            if (indice < perguntas.length) {
+                mostrarPergunta();
+            } else {
+                quiz.innerHTML = `<h2>Fim do jogo! Você fez ${pontos} pontos de ${perguntas.length}.</h2>`;
+                botao.style.display = "none";
+            }
+        });
+
+        mostrarPergunta();
+    </script>
+</body>
+</html>
