@@ -57,8 +57,19 @@
                 pontos++;
                 resultado.textContent = "✅ Resposta correta!";
             } else {
-                resultado.textContent = "❌ Resposta errada!";
+                resultado.textContent = "❌ Resposta errada! O jogo vai recomeçar...";
+                reiniciar();
             }
+        }
+
+        function reiniciar() {
+            indice = 0;
+            pontos = 0;
+            botao.style.display = "block";
+            setTimeout(() => {
+                resultado.textContent = "";
+                mostrarPergunta();
+            }, 2000);
         }
 
         botao.addEventListener("click", () => {
